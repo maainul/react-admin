@@ -3,7 +3,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Topbar } from "./scenes/global/Topbar";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
-import { ProjSidebar } from "./scenes/global/ProjSidebar";
+// import { Sidebar } from "./scenes/global/Sidebar";
+import { Sidebar } from "./scenes/global/Sidebar";
 import Team from "./scenes/team";
 import Contacts from "./scenes/contacts";
 import Invoices from "./scenes/invoices";
@@ -22,7 +23,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <ProjSidebar />
+          <Sidebar />
           <main className="content">
             <Topbar />
             <Routes>

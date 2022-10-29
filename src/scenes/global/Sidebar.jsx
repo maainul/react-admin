@@ -17,7 +17,6 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
-// Naviagation Items
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -36,22 +35,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-// Navigation Title
-const ItemTitle = ({ title }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  return (
-    <Typography
-      variant="h6"
-      color={colors.grey[300]}
-      sx={{ m: "15px 0 5px 20px" }}
-    >
-      {title}
-    </Typography>
-  );
-};
-
-export const ProjSidebar = () => {
+export const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -96,7 +80,7 @@ export const ProjSidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINS
+                  ADMINIS
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -123,10 +107,10 @@ export const ProjSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Mainul Hasan
+                  Ed Roh
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Beximco Ind Park
+                  VP Fancy Admin
                 </Typography>
               </Box>
             </Box>
@@ -140,7 +124,14 @@ export const ProjSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <ItemTitle title="Data" />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Data
+            </Typography>
             <Item
               title="Manage Team"
               to="/team"
@@ -162,7 +153,14 @@ export const ProjSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <ItemTitle title="Pages" />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
             <Item
               title="Profile Form"
               to="/form"
@@ -184,7 +182,14 @@ export const ProjSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <ItemTitle title="Charts" />
+
+            <Typography
+              variant="h6"
+              color={colors.grey[300]}
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Charts
+            </Typography>
             <Item
               title="Bar Chart"
               to="/bar"
