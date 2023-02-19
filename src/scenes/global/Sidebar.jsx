@@ -16,7 +16,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -212,11 +212,25 @@ export const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Geography Chart"
-              to="/geography"
+              title="User"
+              to="/users"
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+            />
+            <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+            >
+              Users
+            </Typography>
+            <Item
+                title="Registration"
+                to="/users/registration"
+                icon={<AccessibilityIcon />}
+                selected={selected}
+                setSelected={setSelected}
             />
           </Box>
         </Menu>

@@ -3,7 +3,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Topbar } from "./scenes/global/Topbar";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./scenes/dashboard";
-// import { Sidebar } from "./scenes/global/Sidebar";
 import { Sidebar } from "./scenes/global/Sidebar";
 import Team from "./scenes/team";
 import Contacts from "./scenes/contacts";
@@ -15,6 +14,7 @@ import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import Calendar from "./scenes/calendar";
+import AuthRoutes from "./features/auth/routes/AuthRoutes";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -38,6 +38,7 @@ function App() {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/geography" element={<Geography />} />
               <Route path="/calendar" element={<Calendar />} />
+              <Route path="/users/*" element={<AuthRoutes />}></Route>
             </Routes>
           </main>
         </div>

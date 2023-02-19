@@ -1,0 +1,1 @@
+export const AUTH_API = 'http://192.168.104.34:5000' 
