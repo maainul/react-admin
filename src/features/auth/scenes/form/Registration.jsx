@@ -5,6 +5,8 @@ import { Form, Formik } from "formik";
 import * as yup from "yup";
 import SubmitBtn from "../../../../components/SubmitBtn";
 import { RegistrationService } from "../../service/AuthService";
+import { Alert } from "../../../../helpers/SweetAlert";
+
 const Registration = () => {
     const [initialValues, setInitialValues] = useState(initValidation)
     const handleFormSubmit = async (values) => {
@@ -13,8 +15,10 @@ const Registration = () => {
             const result = await RegistrationService({ ...values })
             // check status . if status 201 then give success to the toster
             if (result.status === 201) {
-                alert(result.status) // update with toster
+                Alert(result.data.title, result.data.message, result.data.status)
             }
+            // sweet alert 
+
         } catch (error) {
             alert(error); // update with toster
         }
