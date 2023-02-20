@@ -1,5 +1,4 @@
 import { Box, Grid, TextField } from "@mui/material";
-import { useState } from "react";
 import { Form, Formik } from "formik";
 import Header from "../../../../components/Header";
 import SubmitBtn from "../../../../components/SubmitBtn";
@@ -7,7 +6,7 @@ import { RegistrationService } from "../../service/AuthService";
 import { Alert } from "../../../../helpers/SweetAlert";
 import * as yup from "yup";
 
-const Registration = () => {
+const Registration = ({ input }) => {
     // initial values
     const initialValues = {
         firstname: "",
@@ -62,128 +61,24 @@ const Registration = () => {
                     }) => (
                         <Form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="First Name"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.firstname}
-                                        name="firstname"
-                                        error={!!touched.firstname && !!errors.firstname}
-                                        helperText={touched.firstname && errors.firstname}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Middle Name"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.middlename}
-                                        name="middlename"
-                                        error={!!touched.middlename && !!errors.middlename}
-                                        helperText={touched.middlename && errors.middlename}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Last Name"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.lastname}
-                                        name="lastname"
-                                        error={!!touched.lastname && !!errors.lastname}
-                                        helperText={touched.lastname && errors.lastname}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Email"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.email}
-                                        name="email"
-                                        error={!!touched.email && !!errors.email}
-                                        helperText={touched.email && errors.email}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Phone"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.phone}
-                                        name="phone"
-                                        error={!!touched.phone && !!errors.phone}
-                                        helperText={touched.phone && errors.phone}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={4}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="National ID"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.nid}
-                                        name="nid"
-                                        error={!!touched.nid && !!errors.nid}
-                                        helperText={touched.nid && errors.n}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Present Address"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.present_address}
-                                        name="present_address"
-                                        error={!!touched.present_address && !!errors.present_address}
-                                        helperText={touched.present_address && errors.present_address}
-                                    />
-                                </Grid>
-
-                                <Grid item xs={6}>
-                                    <TextField
-                                        fullWidth
-                                        variant="filled"
-                                        type="text"
-                                        label="Permanent Address"
-                                        onBlur={handleBlur}
-                                        onChange={handleChange}
-                                        value={values.permanent_address}
-                                        name="permanent_address"
-                                        error={!!touched.permanent_address && !!errors.permanent_address}
-                                        helperText={touched.permanent_address && errors.permanent_address}
-                                    />
-                                </Grid>
-
-                                <SubmitBtn title="Create New User" />
+                                {input.map((input) => (
+                                    <Grid item xs={input.xs} key={input.id}>
+                                        <TextField
+                                            fullWidth
+                                            variant={input.variant}
+                                            type={input.type}
+                                            label={input.label}
+                                            onBlur={handleBlur}
+                                            onChange={handleChange}
+                                            value={values[input.name]}
+                                            name={input.name}
+                                            error={!!touched[input.name] && !!errors[input.name]}
+                                            helperText={touched[input.name] && errors[input.name]}
+                                        />
+                                    </Grid>
+                                ))}
                             </Grid>
+                            <SubmitBtn title="Create New User" />
                         </Form>
                     )}
                 </Formik>

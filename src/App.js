@@ -15,6 +15,7 @@ import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import Calendar from "./scenes/calendar";
 import AuthRoutes from "./features/auth/routes/AuthRoutes";
+import SettingsRoutes from "./features/settings/routes/SettingsRoutes";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -39,6 +40,7 @@ function App() {
               <Route path="/geography" element={<Geography />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/users/*" element={<AuthRoutes />}></Route>
+              <Route path="/settings/*" element={<SettingsRoutes />}></Route>
             </Routes>
           </main>
         </div>
