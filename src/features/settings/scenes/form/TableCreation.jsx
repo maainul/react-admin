@@ -1,15 +1,25 @@
-import { Box, Grid, TextField, Typography } from "@mui/material";
+import { Box, Grid, TextField } from "@mui/material";
 import { Form, Formik } from "formik";
 import Header from "../../../../components/Header";
 import SubmitBtn from "../../../../components/SubmitBtn";
-import { TableService } from "../../service/TableService";
+import { GetTablesService, TableService } from "../../service/TableService";
 import { Alert } from "../../../../helpers/SweetAlert";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AttributeCreation from "./AttributeCreation";
 
 const TableCreation = () => {
 
     const [isTableExists, setIsTableExists] = useState(false);
+    const [tables, setTables] = useState([]);
+
+    useEffect(() => {
+        async function fetchTables() {
+            const res = await GetTablesService();
+            setTables(res.data.data.tables);
+        }
+        fetchTables();
+    }, []);
 
     const initialValues = {
         tableName: "",
@@ -88,6 +98,12 @@ const TableCreation = () => {
                     )}
                 </Formik>
             </Box>
+
+            <Box>
+
+                <AttributeCreation tables={tables} />
+            </Box>
+
         </ >
     )
 }
