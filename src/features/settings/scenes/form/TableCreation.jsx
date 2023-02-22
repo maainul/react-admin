@@ -19,18 +19,22 @@ const TableCreation = () => {
         tableName: yup.string().required("Table Name is Required"),
     });
 
+    const setTableCreated = () => {
+        setIsTableExists(false);
+    }
 
     const handleFormSubmit = async (values, formikBag) => {
         try {
             const result = await TableService({ ...values });
 
             if (result.status === 201) {
-                Alert(result.data.title, result.data.message, result.data.status)
+                Alert(result.data.title, result.data.message, result.data.status);
+                setTableCreated();
                 formikBag.resetForm();
             }
             if (result.data.status === "exists") {
                 setIsTableExists(true);
-                formikBag.setSubmitting(false);
+                formikBag.resetForm();
             }
         } catch (error) {
             console.log("Error While add data. ", error);
@@ -54,7 +58,6 @@ const TableCreation = () => {
                         handleBlur,
                         handleChange,
                         handleSubmit,
-                        isSubmitting
                     }) => (
                         <Form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
@@ -70,13 +73,16 @@ const TableCreation = () => {
                                         name="tableName"
                                         error={!!touched.tableName && !!errors.tableName}
                                         helperText={
-                                            (touched.tableName && errors.tableName) ||
-                                            (isTableExists && <span style={{ color: "red", fontSize: "12px" }}>Table already exists</span>)
+                                            isTableExists ? (
+                                                <span style={{ color: "red" }}>Table already exists</span>
+                                            ) : touched.tableName && errors.tableName ? (
+                                                <span style={{ color: "red" }}>Table Name is Required</span>
+                                            ) : null
                                         }
                                     />
                                 </Grid>
 
-                                <SubmitBtn title="Create New Table" isSubmitting={isSubmitting} />
+                                <SubmitBtn title="Create New Table" />
                             </Grid>
                         </Form>
                     )}
