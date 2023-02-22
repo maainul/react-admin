@@ -241,7 +241,7 @@ export const Sidebar = () => {
               Settings
             </Typography>
             <Item
-              title="Settings"
+              title="Create Table "
               to="/settings/table/create"
               icon={<SettingsIcon />}
               selected={selected}

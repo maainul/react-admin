@@ -1,12 +1,15 @@
-import { Box, Grid, TextField } from "@mui/material";
+import { Box, Grid, TextField, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
 import Header from "../../../../components/Header";
 import SubmitBtn from "../../../../components/SubmitBtn";
 import { TableService } from "../../service/TableService";
 import { Alert } from "../../../../helpers/SweetAlert";
 import * as yup from "yup";
+import { useState } from "react";
 
 const TableCreation = () => {
+
+    const [isTableExists, setIsTableExists] = useState(false);
 
     const initialValues = {
         tableName: "",
@@ -16,6 +19,7 @@ const TableCreation = () => {
         tableName: yup.string().required("Table Name is Required"),
     });
 
+
     const handleFormSubmit = async (values, formikBag) => {
         try {
             const result = await TableService({ ...values });
@@ -23,6 +27,10 @@ const TableCreation = () => {
             if (result.status === 201) {
                 Alert(result.data.title, result.data.message, result.data.status)
                 formikBag.resetForm();
+            }
+            if (result.data.status === "exists") {
+                setIsTableExists(true);
+                formikBag.setSubmitting(false);
             }
         } catch (error) {
             console.log("Error While add data. ", error);
@@ -46,6 +54,7 @@ const TableCreation = () => {
                         handleBlur,
                         handleChange,
                         handleSubmit,
+                        isSubmitting
                     }) => (
                         <Form onSubmit={handleSubmit}>
                             <Grid container spacing={2}>
@@ -60,10 +69,14 @@ const TableCreation = () => {
                                         value={values.tableName}
                                         name="tableName"
                                         error={!!touched.tableName && !!errors.tableName}
-                                        helperText={touched.tableName && errors.tableName}
+                                        helperText={
+                                            (touched.tableName && errors.tableName) ||
+                                            (isTableExists && <span style={{ color: "red", fontSize: "12px" }}>Table already exists</span>)
+                                        }
                                     />
                                 </Grid>
-                                <SubmitBtn title="Create New Table" />
+
+                                <SubmitBtn title="Create New Table" isSubmitting={isSubmitting} />
                             </Grid>
                         </Form>
                     )}
