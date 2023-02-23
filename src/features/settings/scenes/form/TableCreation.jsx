@@ -16,6 +16,7 @@ const TableCreation = () => {
     useEffect(() => {
         async function fetchTables() {
             const res = await GetTablesService();
+            console.log("render")
             setTables(res.data.data.tables);
         }
         fetchTables();
@@ -41,6 +42,10 @@ const TableCreation = () => {
                 Alert(result.data.title, result.data.message, result.data.status);
                 setTableCreated();
                 formikBag.resetForm();
+
+                //Fetch the updated list of tables
+                const res = await GetTablesService();
+                setTables(res.data.data.tables);
             }
             if (result.data.status === "exists") {
                 setIsTableExists(true);
